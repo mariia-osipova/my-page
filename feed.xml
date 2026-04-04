@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+    <title>Mariia Osipova</title>
+    <link href="https://mariia-osipova.github.io/my-page/feed.xml" rel="self" />
+    <link href="https://mariia-osipova.github.io/my-page" />
+    <updated>2026-04-04T17:10:11-03:00</updated>
+    <author>
+        <name>Mariia Osipova</name>
+    </author>
+    <id>https://mariia-osipova.github.io/my-page</id>
+
+    <entry>
+        <title>6th post</title>
+        <author>
+            <name>Mariia Osipova</name>
+        </author>
+        <link href="https://mariia-osipova.github.io/my-page/6th-post.html"/>
+        <id>https://mariia-osipova.github.io/my-page/6th-post.html</id>
+        <media:content url="https://mariia-osipova.github.io/my-page/media/posts/10/66img.png" medium="image" />
+
+        <updated>2026-04-04T17:10:11-03:00</updated>
+            <summary type="html">
+                <![CDATA[
+                        <img src="https://mariia-osipova.github.io/my-page/media/posts/10/66img.png" alt="" />
+                    fhvnshjfdbvjh UHDIHEUFHUBVhbjvbv 834ufnsjfvbnj
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                    <p><img src="https://mariia-osipova.github.io/my-page/media/posts/10/66img.png" class="type:primaryImage" alt="" /></p>
+                <p>fhvnshjfdbvjh UHDIHEUFHUBVhbjvbv 834ufnsjfvbnj</p>
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>5th post</title>
+        <author>
+            <name>Mariia Osipova</name>
+        </author>
+        <link href="https://mariia-osipova.github.io/my-page/5th-post.html"/>
+        <id>https://mariia-osipova.github.io/my-page/5th-post.html</id>
+        <media:content url="https://mariia-osipova.github.io/my-page/media/posts/9/55img.png" medium="image" />
+
+        <updated>2026-04-04T16:46:28-03:00</updated>
+            <summary></summary>
+        <content></content>
+    </entry>
+    <entry>
+        <title>my 4th post!!!</title>
+        <author>
+            <name>Mariia Osipova</name>
+        </author>
+        <link href="https://mariia-osipova.github.io/my-page/my-4th-post.html"/>
+        <id>https://mariia-osipova.github.io/my-page/my-4th-post.html</id>
+        <media:content url="https://mariia-osipova.github.io/my-page/media/posts/8/44img.png" medium="image" />
+
+        <updated>2026-04-04T16:46:11-03:00</updated>
+            <summary type="html">
+                <![CDATA[
+                        <img src="https://mariia-osipova.github.io/my-page/media/posts/8/44img.png" alt="" />
+                    fnvdkjnvNDKJNKJNVk jnvkjdnfv
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                    <p><img src="https://mariia-osipova.github.io/my-page/media/posts/8/44img.png" class="type:primaryImage" alt="" /></p>
+                <p>fnvdkjnvNDKJNKJNVk jnvkjdnfv</p>
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>my third page</title>
+        <author>
+            <name>Mariia Osipova</name>
+        </author>
+        <link href="https://mariia-osipova.github.io/my-page/my-third-page.html"/>
+        <id>https://mariia-osipova.github.io/my-page/my-third-page.html</id>
+        <media:content url="https://mariia-osipova.github.io/my-page/media/posts/7/22img.png" medium="image" />
+
+        <updated>2026-04-04T16:45:49-03:00</updated>
+            <summary type="html">
+                <![CDATA[
+                        <img src="https://mariia-osipova.github.io/my-page/media/posts/7/22img.png" alt="" />
+                    fjvndkjsfnksjdnvjk
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                    <p><img src="https://mariia-osipova.github.io/my-page/media/posts/7/22img.png" class="type:primaryImage" alt="" /></p>
+                <p>fjvndkjsfnksjdnvjk</p>
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>my second post</title>
+        <author>
+            <name>Mariia Osipova</name>
+        </author>
+        <link href="https://mariia-osipova.github.io/my-page/my-second-post.html"/>
+        <id>https://mariia-osipova.github.io/my-page/my-second-post.html</id>
+        <media:content url="https://mariia-osipova.github.io/my-page/media/posts/6/33img.png" medium="image" />
+
+        <updated>2026-04-04T16:45:28-03:00</updated>
+            <summary type="html">
+                <![CDATA[
+                        <img src="https://mariia-osipova.github.io/my-page/media/posts/6/33img.png" alt="" />
+                    hihi haha
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                    <p><img src="https://mariia-osipova.github.io/my-page/media/posts/6/33img.png" class="type:primaryImage" alt="" /></p>
+                <p>hihi haha</p>
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>my first post</title>
+        <author>
+            <name>Mariia Osipova</name>
+        </author>
+        <link href="https://mariia-osipova.github.io/my-page/my-first-post.html"/>
+        <id>https://mariia-osipova.github.io/my-page/my-first-post.html</id>
+        <media:content url="https://mariia-osipova.github.io/my-page/media/posts/5/11img-2.png" medium="image" />
+            <category term="jeje"/>
+            <category term="jaja"/>
+
+        <updated>2026-04-04T16:19:52-03:00</updated>
+            <summary type="html">
+                <![CDATA[
+                        <img src="https://mariia-osipova.github.io/my-page/media/posts/5/11img-2.png" alt="" />
+                    my first post for my first web
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                    <p><img src="https://mariia-osipova.github.io/my-page/media/posts/5/11img-2.png" class="type:primaryImage" alt="" /></p>
+                <p>my first post for my first web</p>
+            ]]>
+        </content>
+    </entry>
+</feed>

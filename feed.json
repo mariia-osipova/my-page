@@ -1,0 +1,103 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Mariia Osipova",
+    "description": "",
+    "home_page_url": "https://mariia-osipova.github.io/my-page",
+    "feed_url": "https://mariia-osipova.github.io/my-page/feed.json",
+    "user_comment": "",
+    "author": {
+        "name": "Mariia Osipova"
+    },
+    "items": [
+        {
+            "id": "https://mariia-osipova.github.io/my-page/6th-post.html",
+            "url": "https://mariia-osipova.github.io/my-page/6th-post.html",
+            "title": "6th post",
+            "summary": "fhvnshjfdbvjh UHDIHEUFHUBVhbjvbv 834ufnsjfvbnj",
+            "content_html": "<p>fhvnshjfdbvjh UHDIHEUFHUBVhbjvbv 834ufnsjfvbnj</p>",
+            "image": "https://mariia-osipova.github.io/my-page/media/posts/10/66img.png",
+            "author": {
+                "name": "Mariia Osipova"
+            },
+            "tags": [
+            ],
+            "date_published": "2026-04-04T17:10:11-03:00",
+            "date_modified": "2026-04-04T17:10:11-03:00"
+        },
+        {
+            "id": "https://mariia-osipova.github.io/my-page/5th-post.html",
+            "url": "https://mariia-osipova.github.io/my-page/5th-post.html",
+            "title": "5th post",
+            "image": "https://mariia-osipova.github.io/my-page/media/posts/9/55img.png",
+            "author": {
+                "name": "Mariia Osipova"
+            },
+            "tags": [
+            ],
+            "date_published": "2026-04-04T16:46:28-03:00",
+            "date_modified": "2026-04-04T16:46:28-03:00"
+        },
+        {
+            "id": "https://mariia-osipova.github.io/my-page/my-4th-post.html",
+            "url": "https://mariia-osipova.github.io/my-page/my-4th-post.html",
+            "title": "my 4th post!!!",
+            "summary": "fnvdkjnvNDKJNKJNVk jnvkjdnfv",
+            "content_html": "<p>fnvdkjnvNDKJNKJNVk jnvkjdnfv</p>",
+            "image": "https://mariia-osipova.github.io/my-page/media/posts/8/44img.png",
+            "author": {
+                "name": "Mariia Osipova"
+            },
+            "tags": [
+            ],
+            "date_published": "2026-04-04T16:46:11-03:00",
+            "date_modified": "2026-04-04T16:46:11-03:00"
+        },
+        {
+            "id": "https://mariia-osipova.github.io/my-page/my-third-page.html",
+            "url": "https://mariia-osipova.github.io/my-page/my-third-page.html",
+            "title": "my third page",
+            "summary": "fjvndkjsfnksjdnvjk",
+            "content_html": "<p>fjvndkjsfnksjdnvjk</p>",
+            "image": "https://mariia-osipova.github.io/my-page/media/posts/7/22img.png",
+            "author": {
+                "name": "Mariia Osipova"
+            },
+            "tags": [
+            ],
+            "date_published": "2026-04-04T16:45:49-03:00",
+            "date_modified": "2026-04-04T16:45:49-03:00"
+        },
+        {
+            "id": "https://mariia-osipova.github.io/my-page/my-second-post.html",
+            "url": "https://mariia-osipova.github.io/my-page/my-second-post.html",
+            "title": "my second post",
+            "summary": "hihi haha",
+            "content_html": "<p>hihi haha</p>",
+            "image": "https://mariia-osipova.github.io/my-page/media/posts/6/33img.png",
+            "author": {
+                "name": "Mariia Osipova"
+            },
+            "tags": [
+            ],
+            "date_published": "2026-04-04T16:45:28-03:00",
+            "date_modified": "2026-04-04T16:45:28-03:00"
+        },
+        {
+            "id": "https://mariia-osipova.github.io/my-page/my-first-post.html",
+            "url": "https://mariia-osipova.github.io/my-page/my-first-post.html",
+            "title": "my first post",
+            "summary": "my first post for my first web",
+            "content_html": "<p>my first post for my first web</p>",
+            "image": "https://mariia-osipova.github.io/my-page/media/posts/5/11img-2.png",
+            "author": {
+                "name": "Mariia Osipova"
+            },
+            "tags": [
+                   "jeje",
+                   "jaja"
+            ],
+            "date_published": "2026-04-04T16:19:52-03:00",
+            "date_modified": "2026-04-04T16:21:10-03:00"
+        }
+    ]
+}

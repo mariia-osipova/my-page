@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://mariia-osipova.github.io/my-page/sitemap.xml
