@@ -41,9 +41,9 @@
   };
 
   let dpr = window.devicePixelRatio || 1;
+  let layout = { fit: 1, tx: 0, ty: 0 };
   let frameId = 0;
   let resizeId = 0;
-  let reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function hash32(str) {
     let h = 2166136261;
@@ -207,6 +207,53 @@
     };
   }
 
+  function buildReferenceBounds() {
+    const p = paramsForFrame(5);
+    const lines = p.text.split('\n');
+    const leading = p.gh * 1.4;
+    let y = 0;
+    let minX = Infinity;
+    let minY = Infinity;
+    let maxX = -Infinity;
+    let maxY = -Infinity;
+
+    lines.forEach((line) => {
+      let x = 0;
+      line.split('').forEach((c) => {
+        if (c === ' ') {
+          x += p.gw * 0.5 + p.tr;
+          return;
+        }
+        const skel = SK[c];
+        if (!skel) {
+          x += p.gw + p.tr;
+          return;
+        }
+        const gw = p.gw * (WIDTH[c] || 1);
+        skel.forEach((stroke) => {
+          stroke.forEach((pt) => {
+            const px = x + pt[0] * gw;
+            const py = y + pt[1] * p.gh;
+            if (px < minX) minX = px;
+            if (px > maxX) maxX = px;
+            if (py < minY) minY = py;
+            if (py > maxY) maxY = py;
+          });
+        });
+        x += gw + p.tr;
+      });
+      y += leading;
+    });
+
+    const pad = Math.max(40, cfg.sw * 4 + 20);
+    return {
+      minX: minX - pad,
+      minY: minY - pad,
+      maxX: maxX + pad,
+      maxY: maxY + pad,
+    };
+  }
+
   function syncCanvasSize() {
     const box = host.getBoundingClientRect();
     const width = Math.max(1, Math.round(box.width));
@@ -218,6 +265,18 @@
     dpr = nextDpr;
     if (canvas.width !== pixelWidth) canvas.width = pixelWidth;
     if (canvas.height !== pixelHeight) canvas.height = pixelHeight;
+    const bounds = buildReferenceBounds();
+    const bw = Math.max(bounds.maxX - bounds.minX, 1);
+    const bh = Math.max(bounds.maxY - bounds.minY, 1);
+    const margin = Math.max(16, Math.min(60, Math.min(width, height) * 0.12));
+    const fit = Math.min((width - margin * 2) / bw, (height - margin * 2) / bh) * cfg.zoom;
+
+    layout = {
+      fit,
+      tx: width / 2 - (bounds.minX + bw / 2) * fit,
+      ty: height / 2 - (bounds.minY + bh / 2) * fit,
+    };
+
     return { width, height };
   }
 
@@ -226,18 +285,12 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
 
-    const { paths, bounds } = buildPaths(wander, phase);
+    const { paths } = buildPaths(wander, phase);
     if (!paths.length) return;
 
-    const bw = Math.max(bounds.maxX - bounds.minX, 1);
-    const bh = Math.max(bounds.maxY - bounds.minY, 1);
-    const margin = Math.max(16, Math.min(60, Math.min(W, H) * 0.12));
-    const fit = Math.min((W - margin * 2) / bw, (H - margin * 2) / bh) * cfg.zoom;
-
     ctx.save();
-    ctx.translate(W / 2, H / 2);
-    ctx.scale(fit, fit);
-    ctx.translate(-(bounds.minX + bw / 2), -(bounds.minY + bh / 2));
+    ctx.translate(layout.tx, layout.ty);
+    ctx.scale(layout.fit, layout.fit);
     ctx.strokeStyle = '#111';
     ctx.lineWidth = cfg.sw;
     ctx.lineJoin = 'round';
@@ -286,24 +339,10 @@
 
   function render() {
     stop();
-    if (reduced || document.hidden) {
-      draw(5, 0);
+    if (document.hidden) {
       return;
     }
     frameId = requestAnimationFrame(tick);
-  }
-
-  const reduceQuery = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (reduceQuery) {
-    const onReduceChange = () => {
-      reduced = reduceQuery.matches;
-      render();
-    };
-    if (reduceQuery.addEventListener) {
-      reduceQuery.addEventListener('change', onReduceChange);
-    } else if (reduceQuery.addListener) {
-      reduceQuery.addListener(onReduceChange);
-    }
   }
 
   document.addEventListener('visibilitychange', render);
