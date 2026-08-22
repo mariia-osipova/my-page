@@ -59,15 +59,38 @@
   color: var(--bar-link);
   padding: 0.35rem 0.85rem;
   border-radius: 999px;
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  transition: none;
+}
+
+.navbar .navbar__menu li a > .nav-link__label,
+.navbar .navbar__menu li span[aria-haspopup="true"] > .nav-link__label {
+  display: inline-block;
+  white-space: nowrap;
+  text-decoration: none;
 }
 
 .navbar .navbar__menu li a:hover,
 .navbar .navbar__menu li span[aria-haspopup="true"]:hover,
 .navbar .navbar__menu li a:focus,
 .navbar .navbar__menu li span[aria-haspopup="true"]:focus {
-  color: var(--bar-link-hover);
-  background: rgba(0, 0, 0, 0.08);
+  color: var(--bar-link);
+  background: transparent;
   text-decoration: none;
+}
+
+.navbar .navbar__menu li a:hover > .nav-link__label,
+.navbar .navbar__menu li span[aria-haspopup="true"]:hover > .nav-link__label,
+.navbar .navbar__menu li a:focus-visible > .nav-link__label,
+.navbar .navbar__menu li span[aria-haspopup="true"]:focus-visible > .nav-link__label {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+  text-decoration-skip-ink: none;
 }
 
 .navbar__toggle {
