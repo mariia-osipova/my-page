@@ -172,7 +172,7 @@
 
       ctx.beginPath();
       ctx.moveTo(strokePoints[0].x, strokePoints[0].y);
-      ctx.lineWidth = 3.6;
+      ctx.lineWidth = 3.8;
       ctx.globalAlpha = 0.95;
 
       if (strokePoints.length === 2) {
