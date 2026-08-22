@@ -40,7 +40,7 @@
     zoom: 0.9,
   };
 
-  const SIZE_MULTIPLIER = 1.45;
+  const SIZE_MULTIPLIER = 1.5;
 
   let dpr = window.devicePixelRatio || 1;
   let layout = { fit: 1, tx: 0, ty: 0 };
