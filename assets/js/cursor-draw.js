@@ -14,7 +14,7 @@
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   const lifeMs = 6000;
   const maxPoints = 420;
-  const maxStep = 14;
+  const maxStep = 6;
   const follow = 0.18;
   let rafId = 0;
   let hasTarget = false;
@@ -87,6 +87,28 @@
     }
   }
 
+  function getSmoothedPoints() {
+    if (points.length < 3) {
+      return points;
+    }
+
+    const smoothed = [{ ...points[0] }];
+    const strength = 0.28;
+
+    for (let i = 1; i < points.length; i += 1) {
+      const prev = smoothed[i - 1];
+      const curr = points[i];
+
+      smoothed.push({
+        x: prev.x + (curr.x - prev.x) * strength,
+        y: prev.y + (curr.y - prev.y) * strength,
+        time: curr.time
+      });
+    }
+
+    return smoothed;
+  }
+
   function handlePointerMove(event) {
     targetX = event.clientX + window.scrollX;
     targetY = event.clientY + window.scrollY;
@@ -123,41 +145,36 @@
     ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
 
     if (points.length > 1) {
+      const strokePoints = getSmoothedPoints();
+
       ctx.save();
       ctx.translate(-scrollX, -scrollY);
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-      ctx.strokeStyle = 'rgba(130, 130, 130, 1)';
+      ctx.strokeStyle = 'rgba(98, 98, 98, 0.95)';
 
-      for (let i = 1; i < points.length; i += 1) {
-        const prev = points[i - 1];
-        const curr = points[i];
-        const age = now - curr.time;
-        const t = 1 - age / lifeMs;
+      ctx.beginPath();
+      ctx.moveTo(strokePoints[0].x, strokePoints[0].y);
+      ctx.lineWidth = 3.1;
+      ctx.globalAlpha = 0.95;
 
-        if (t <= 0) {
-          continue;
+      if (strokePoints.length === 2) {
+        ctx.lineTo(strokePoints[1].x, strokePoints[1].y);
+      } else {
+        for (let i = 1; i < strokePoints.length - 1; i += 1) {
+          const prev = strokePoints[i];
+          const next = strokePoints[i + 1];
+          const midX = (prev.x + next.x) / 2;
+          const midY = (prev.y + next.y) / 2;
+          ctx.quadraticCurveTo(prev.x, prev.y, midX, midY);
         }
 
-        const alpha = Math.max(0, Math.min(1, t * 0.82));
-        const width = 4;
-        const midX = (prev.x + curr.x) / 2;
-        const midY = (prev.y + curr.y) / 2;
-        ctx.beginPath();
-        ctx.globalAlpha = alpha;
-        ctx.lineWidth = width;
-
-        if (i === 1) {
-          ctx.moveTo(prev.x, prev.y);
-        } else {
-          const before = points[i - 2];
-          ctx.moveTo((before.x + prev.x) / 2, (before.y + prev.y) / 2);
-        }
-
-        ctx.quadraticCurveTo(prev.x, prev.y, midX, midY);
-        ctx.stroke();
+        const last = strokePoints[strokePoints.length - 1];
+        const beforeLast = strokePoints[strokePoints.length - 2];
+        ctx.quadraticCurveTo(beforeLast.x, beforeLast.y, last.x, last.y);
       }
 
+      ctx.stroke();
       ctx.globalAlpha = 1;
       ctx.restore();
     }
