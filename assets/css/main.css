@@ -1257,6 +1257,7 @@ textarea {
 }
 .feed__content {
   max-width: var(--entry-width);
+  background: var(--page-bg);
 }
 .feed__image {
   background: var(--lighter);
@@ -1351,6 +1352,7 @@ textarea {
 }
 
 .content {
+  background: var(--page-bg);
   overflow: hidden;
 }
 .content__meta {

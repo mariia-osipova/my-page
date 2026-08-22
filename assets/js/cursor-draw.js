@@ -1,10 +1,20 @@
 (() => {
+  const supportsFinePointer =
+    window.matchMedia &&
+    window.matchMedia('(pointer: fine)').matches &&
+    window.matchMedia('(hover: hover)').matches;
+
+  if (!supportsFinePointer) {
+    return;
+  }
+
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   const points = [];
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   const lifeMs = 6000;
   const maxPoints = 420;
+  const maxStep = 14;
   const follow = 0.18;
   let rafId = 0;
   let hasTarget = false;
@@ -20,10 +30,10 @@
   canvas.id = 'cursor-draw-canvas';
   canvas.setAttribute('aria-hidden', 'true');
   canvas.style.cssText = [
-    'position:absolute',
+    'position:fixed',
     'left:0',
     'top:0',
-    'z-index:79',
+    'z-index:-1',
     'pointer-events:none',
     'mix-blend-mode:multiply',
     'opacity:0.95'
@@ -47,10 +57,33 @@
     }
   }
 
-  function addPoint(x, y, now) {
-    points.push({ x, y, time: now });
+  function pushPoint(x, y, time) {
+    points.push({ x, y, time });
     if (points.length > maxPoints) {
       points.splice(0, points.length - maxPoints);
+    }
+  }
+
+  function addPoint(x, y, now) {
+    const prev = points[points.length - 1];
+
+    if (!prev) {
+      pushPoint(x, y, now);
+      return;
+    }
+
+    const dx = x - prev.x;
+    const dy = y - prev.y;
+    const dist = Math.hypot(dx, dy);
+    const steps = Math.max(1, Math.ceil(dist / maxStep));
+
+    for (let i = 1; i <= steps; i += 1) {
+      const t = i / steps;
+      pushPoint(
+        prev.x + dx * t,
+        prev.y + dy * t,
+        prev.time + (now - prev.time) * t
+      );
     }
   }
 
@@ -74,6 +107,8 @@
   function draw() {
     rafId = 0;
     const now = performance.now();
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
 
     if (hasTarget) {
       currentX += (targetX - currentX) * follow;
@@ -88,9 +123,11 @@
     ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
 
     if (points.length > 1) {
+      ctx.save();
+      ctx.translate(-scrollX, -scrollY);
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-      ctx.strokeStyle = 'rgba(150, 150, 150, 1)';
+      ctx.strokeStyle = 'rgba(130, 130, 130, 1)';
 
       for (let i = 1; i < points.length; i += 1) {
         const prev = points[i - 1];
@@ -122,6 +159,7 @@
       }
 
       ctx.globalAlpha = 1;
+      ctx.restore();
     }
 
     if (points.length > 0 || hasTarget) {
@@ -141,10 +179,8 @@
   resize();
   window.addEventListener('resize', resize, { passive: true });
   window.addEventListener('pointermove', handlePointerMove, { passive: true });
-  window.addEventListener('scroll', handleScroll, { passive: true });
   window.addEventListener('pointerleave', resetPointer, { passive: true });
   window.addEventListener('pointerout', resetPointer, { passive: true });
-  window.addEventListener('pointercancel', resetPointer, { passive: true });
   window.addEventListener('blur', clearCanvas, { passive: true });
 
   window.addEventListener('keydown', (event) => {

@@ -12,10 +12,12 @@
   left: 0;
   right: 0;
   z-index: 80;
-  height: 4.4rem;
+  height: 3.9rem;
   padding-left: clamp(1rem, 3vw, 3rem);
   padding-right: clamp(1rem, 3vw, 3rem);
-  background: var(--bar-bg);
+  background: rgba(247, 247, 247, 0.7);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--bar-border);
   justify-content: space-between;
   width: 100%;
@@ -25,11 +27,18 @@
 }
 
 .top.sticky {
-  background: var(--bar-bg);
+  background: rgba(247, 247, 247, 0.7);
   border-bottom-color: var(--bar-border);
   position: fixed;
   top: 0;
   animation: none;
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .top,
+  .top.sticky {
+    background: var(--bar-bg);
+  }
 }
 
 .logo {
@@ -78,12 +87,12 @@
 
 @media all and (min-width: 56.25em) {
   .top { 
-    min-height: 4.4rem;
+    min-height: 3.9rem;
   }
 }
 
 body {
-  padding-top: 4.4rem;
+  padding-top: 3.9rem;
 }
 
 @media all and (max-width: 56.1875em) {
