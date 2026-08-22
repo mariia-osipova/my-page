@@ -21,7 +21,10 @@
 </image:image>
 </url>
 <url>
-<loc>https://mariia-osipova.github.io/my-page/contact-page.html</loc>
+<loc>https://mariia-osipova.github.io/my-page/contact/</loc>
+</url>
+<url>
+<loc>https://mariia-osipova.github.io/my-page/cv/</loc>
 <lastmod>2026-04-04T16:12:01-03:00</lastmod>
 </url>
 <url>
@@ -33,7 +36,7 @@
 </image:image>
 </url>
 <url>
-<loc>https://mariia-osipova.github.io/my-page/my-first-page.html</loc>
+<loc>https://mariia-osipova.github.io/my-page/about/</loc>
 <lastmod>2026-04-04T15:55:57-03:00</lastmod>
 </url>
 <url>
@@ -61,7 +64,7 @@
 </image:image>
 </url>
 <url>
-<loc>https://mariia-osipova.github.io/my-page/projects.html</loc>
+<loc>https://mariia-osipova.github.io/my-page/playground/</loc>
 <lastmod>2026-04-04T16:12:21-03:00</lastmod>
 </url>
 </urlset>
