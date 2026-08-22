@@ -61,6 +61,7 @@
   border-radius: 999px;
   display: inline-block;
   position: relative;
+  cursor: pointer;
   text-decoration: none;
   transition: none;
 }
@@ -69,6 +70,7 @@
 .navbar .navbar__menu li span[aria-haspopup="true"] > .nav-link__label {
   display: inline-block;
   white-space: nowrap;
+  cursor: pointer;
   text-decoration: none;
 }
 
