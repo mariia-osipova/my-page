@@ -28,6 +28,11 @@
 
     header.innerHTML = topbarInnerHTML;
 
+    var clickable = header.querySelectorAll('.navbar__menu a, .navbar__menu a *');
+    for (var j = 0; j < clickable.length; j++) {
+      clickable[j].style.cursor = 'pointer';
+    }
+
     var currentPath = normalizePath(location.pathname);
     var links = header.querySelectorAll('.navbar__menu a[href]');
 
