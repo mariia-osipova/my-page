@@ -40,10 +40,14 @@
     zoom: 0.9,
   };
 
+  const SIZE_MULTIPLIER = 1.24;
+
   let dpr = window.devicePixelRatio || 1;
   let layout = { fit: 1, tx: 0, ty: 0 };
   let frameId = 0;
   let resizeId = 0;
+  let animationStart = null;
+  let pausedAt = null;
 
   function hash32(str) {
     let h = 2166136261;
@@ -272,9 +276,9 @@
     const fit = Math.min((width - margin * 2) / bw, (height - margin * 2) / bh) * cfg.zoom;
 
     layout = {
-      fit,
-      tx: width / 2 - (bounds.minX + bw / 2) * fit,
-      ty: height / 2 - (bounds.minY + bh / 2) * fit,
+      fit: fit * SIZE_MULTIPLIER,
+      tx: width / 2 - (bounds.minX + bw / 2) * (fit * SIZE_MULTIPLIER),
+      ty: height / 2 - (bounds.minY + bh / 2) * (fit * SIZE_MULTIPLIER),
     };
 
     return { width, height };
@@ -333,14 +337,23 @@
   }
 
   function tick(now) {
-    draw(currentWander(now), now * 0.001);
+    if (animationStart === null) animationStart = now;
+    const elapsed = now - animationStart;
+    const cycle = 2 * Math.PI / 8000;
+    const wander = 5 + 6 * (1 - Math.cos(elapsed * cycle));
+    draw(wander, elapsed * 0.001);
     frameId = requestAnimationFrame(tick);
   }
 
   function render() {
     stop();
     if (document.hidden) {
+      pausedAt = performance.now();
       return;
+    }
+    if (pausedAt !== null && animationStart !== null) {
+      animationStart += performance.now() - pausedAt;
+      pausedAt = null;
     }
     frameId = requestAnimationFrame(tick);
   }
