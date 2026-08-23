@@ -34,3 +34,28 @@
     min-height: clamp(88px, 20vw, 130px);
   }
 }
+
+.ai-underlined {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.ai-underlined__svg {
+  position: absolute;
+  left: 0;
+  bottom: -0.28em;
+  width: 100%;
+  height: 0.42em;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.ai-underlined__svg path {
+  fill: none;
+  stroke: #111;
+  stroke-width: 3.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
