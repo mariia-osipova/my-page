@@ -63,7 +63,7 @@
 .post-tags {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.55rem 0.8rem;
   margin-top: 1rem;
   font-size: 0.9em;
