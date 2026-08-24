@@ -61,6 +61,8 @@
       button.setAttribute('aria-pressed', String(isActive));
     });
 
+    feedRoot.classList.toggle('feed--filtered', tag !== 'all');
+
     filterCards.forEach((card) => {
       const tags = (card.dataset.tags || '').split(/\s+/).filter(Boolean);
       const isVisible = tag === 'all' || tags.includes(tag);

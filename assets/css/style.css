@@ -2090,6 +2090,13 @@ img.is-loaded {
   display:block;
   grid-auto-flow:row
 }
+.feed.feed--filtered {
+  column-count:initial;
+  column-gap:0;
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:28px;
+}
 .feed__item {
   display:inline-block;
   width:100%;
@@ -2102,6 +2109,23 @@ img.is-loaded {
   overflow:hidden;
   box-shadow:0 6px 18px rgba(0, 0, 0, .06);
   vertical-align:top
+}
+.feed.feed--filtered .feed__item {
+  display:block;
+  margin:0!important;
+}
+.feed.feed--filtered .feed__item.is-hidden {
+  display:none!important;
+}
+@media (max-width:1100px) {
+  .feed.feed--filtered {
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width:700px) {
+  .feed.feed--filtered {
+    grid-template-columns:1fr;
+  }
 }
 .feed__image {
   display:block;
