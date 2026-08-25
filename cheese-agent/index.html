@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Cheese Agent: A FastAPI Chatbot with Vector Search - Mariia Osipova</title>
+    <meta name="description" content="AI-powered cheese agent built with FastAPI, AstraDB vector search, OpenAI, and a lightweight JS frontend.">
+    <meta name="generator" content="Publii Open-Source CMS for Static Site">
+    <link rel="canonical" href="https://mariia-osipova.github.io/my-page/cheese-agent/">
+    <link rel="alternate" type="application/atom+xml" href="https://mariia-osipova.github.io/my-page/feed.xml" title="Mariia Osipova - RSS">
+    <link rel="alternate" type="application/json" href="https://mariia-osipova.github.io/my-page/feed.json" title="Mariia Osipova - JSON">
+    <meta property="og:title" content="Cheese Agent: A FastAPI Chatbot with Vector Search">
+    <meta property="og:image" content="/my-page/media/posts/5/Group-42-3.png">
+    <meta property="og:image:width" content="2440">
+    <meta property="og:image:height" content="1525">
+    <meta property="og:site_name" content="Mariia Osipova">
+    <meta property="og:description" content="AI-powered cheese agent built with FastAPI, AstraDB vector search, OpenAI, and a lightweight JS frontend.">
+    <meta property="og:url" content="https://mariia-osipova.github.io/my-page/cheese-agent/">
+    <meta property="og:type" content="article">
+    <link rel="shortcut icon" href="https://mariia-osipova.github.io/my-page/media/website/Group-15.png" type="image/x-icon">
+    <link rel="stylesheet" href="/my-page/assets/css/style.css?v=5faf7bef3a05d104ff83ae46bf6d7711">
+    <link rel="stylesheet" href="/my-page/assets/css/portfolio-topbar.css?v=9">
+    <script type="application/ld+json">
+        {"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://mariia-osipova.github.io/my-page/cheese-agent/"},"headline":"Cheese Agent: A FastAPI Chatbot with Vector Search","datePublished":"2025-01-20T18:25-03:00","dateModified":"2026-08-25T12:00-03:00","image":{"@type":"ImageObject","url":"/my-page/media/posts/5/Group-42-3.png","height":1525,"width":2440},"description":"AI-powered cheese agent built with FastAPI, AstraDB vector search, OpenAI, and a lightweight JS frontend.","author":{"@type":"Person","name":"Mariia Osipova","url":"https://mariia-osipova.github.io/my-page/authors/mariia-osipova/"},"publisher":{"@type":"Organization","name":"Mariia Osipova"}}
+    </script>
+    <noscript>
+        <style>
+            img[loading] {
+                opacity: 1;
+            }
+        </style>
+    </noscript>
+</head>
+<body class="post-template">
+<header class="top js-header">
+    <a class="logo" href="https://mariia-osipova.github.io/my-page/">Mariia Osipova</a>
+    <nav class="navbar js-navbar">
+        <button class="navbar__toggle js-toggle" aria-label="Menu" aria-haspopup="true" aria-expanded="false">
+            <span class="navbar__toggle-box"><span class="navbar__toggle-inner">Menu</span></span>
+        </button>
+        <ul class="navbar__menu">
+            <li><a href="https://mariia-osipova.github.io/my-page/" title="home" target="_self"><span class="nav-link__label">home</span></a></li>
+            <li><a href="https://mariia-osipova.github.io/my-page/playgrounds/" target="_self"><span class="nav-link__label">playgrounds</span></a></li>
+            <li><a href="https://mariia-osipova.github.io/my-page/about/" target="_self"><span class="nav-link__label">about</span></a></li>
+            <li><a href="https://mariia-osipova.github.io/my-page/contact/" target="_self"><span class="nav-link__label">contact</span></a></li>
+            <li><a href="https://mariia-osipova.github.io/my-page/cv/" target="_self"><span class="nav-link__label">CV</span></a></li>
+        </ul>
+    </nav>
+</header>
+<main class="post">
+    <article class="content">
+        <div class="hero">
+            <header class="hero__content hero__content--centered">
+                <div class="wrapper">
+                    <h1>Cheese Agent: A FastAPI Chatbot with Vector Search</h1>
+                    <div class="feed__meta content__meta content__meta--centered">
+                        <a href="https://mariia-osipova.github.io/my-page/authors/mariia-osipova/" class="feed__author">Mariia Osipova</a>
+                        <time datetime="2025-01-20T18:25" class="feed__date">January 20, 2025</time>
+                    </div>
+                </div>
+            </header>
+            <figure class="hero__image">
+                <div class="hero__image-wrapper">
+                    <img src="/my-page/media/posts/5/Group-42-3.png" srcset="/my-page/media/posts/5/responsive/Group-42-3-xs.png 640w, /my-page/media/posts/5/responsive/Group-42-3-sm.png 768w, /my-page/media/posts/5/responsive/Group-42-3-md.png 1024w, /my-page/media/posts/5/responsive/Group-42-3-lg.png 1366w, /my-page/media/posts/5/responsive/Group-42-3-xl.png 1600w, /my-page/media/posts/5/responsive/Group-42-3-2xl.png 1920w" sizes="88vw" loading="eager" height="1525" width="2440" alt="">
+                </div>
+            </figure>
+        </div>
+        <div class="entry-wrapper content__entry">
+            <style>
+                .cheese-paper {
+                    --paper: #f4efe6;
+                    --ink: #1f1d1a;
+                    --accent: #d68c45;
+                    --accent-soft: rgba(214, 140, 69, 0.18);
+                    margin: 0 0 2rem;
+                }
+
+                .cheese-paper p,
+                .cheese-paper li {
+                    color: var(--ink);
+                }
+
+                .cheese-abstract {
+                    margin: 1.6rem 0 2rem;
+                    padding: 1rem 1.15rem;
+                    border-left: 3px solid var(--accent);
+                    background: linear-gradient(135deg, rgba(244, 239, 230, 0.95), rgba(255, 255, 255, 0.9));
+                }
+
+                .cheese-abstract strong {
+                    letter-spacing: 0.08em;
+                    text-transform: uppercase;
+                    font-size: 0.8rem;
+                }
+
+                .cheese-figure {
+                    margin: 2rem 0;
+                    padding: 1rem;
+                    border-radius: 18px;
+                    background:
+                        radial-gradient(circle at top left, rgba(214, 140, 69, 0.24), transparent 38%),
+                        linear-gradient(145deg, #1f232b, #101319);
+                    color: #f6f1e8;
+                    overflow: hidden;
+                }
+
+                .cheese-figure__caption {
+                    margin: 0.85rem 0 0;
+                    font-size: 0.92rem;
+                    color: rgba(246, 241, 232, 0.84);
+                }
+
+.cheese-figure svg {
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                }
+
+                .cheese-flow {
+                    stroke-dasharray: 8 10;
+                    animation: cheese-dash 12s linear infinite;
+                }
+
+                .cheese-pulse {
+                    animation: cheese-pulse 2.8s ease-in-out infinite;
+                    transform-origin: center;
+                }
+
+                @keyframes cheese-dash {
+                    to {
+                        stroke-dashoffset: -180;
+                    }
+                }
+
+                @keyframes cheese-pulse {
+                    0%,
+                    100% {
+                        transform: scale(1);
+                        opacity: 0.92;
+                    }
+                    50% {
+                        transform: scale(1.08);
+                        opacity: 1;
+                    }
+                }
+
+            </style>
+
+            <section class="cheese-paper">
+                <p>
+                    This post is about my experience building
+                    <a href="https://github.com/mariia-osipova/cheese-agent" target="_blank" rel="noopener noreferrer">Cheese Agent</a>,
+                    a cheese-themed chatbot project with a FastAPI backend, OpenAI embeddings, AstraDB vector search, and a vanilla JS
+                    frontend. I wanted it to feel playful on the surface, but underneath it is really a small retrieval system with a clear
+                    data pipeline and a few moving parts that had to work together reliably.
+                </p>
+
+                <div class="cheese-abstract">
+                    <strong>What this post is</strong>
+                    <p>
+                        This is a short technical reflection on building
+                        <a href="https://github.com/mariia-osipova/cheese-agent" target="_blank" rel="noopener noreferrer">Cheese Agent</a>,
+                        especially the parts that made it feel like a real systems project rather than just a UI experiment. The interesting
+                        work for me was connecting ingestion, embeddings, vector retrieval, prompting, and a lightweight frontend into one
+                        workflow that stayed understandable end to end.
+                    </p>
+                </div>
+
+                <h2>Why I made it</h2>
+                <p>
+                    I wanted to build something that combined an interface people would actually enjoy using with a backend architecture that
+                    forced me to think about retrieval quality, data organization, and deployment. A cheese chatbot is a playful format, but
+                    it is still a good setting for technical questions: how to structure the source data, how to embed it, how to retrieve
+                    the right chunks, and how to keep the model grounded in that context.
+                </p>
+                <p>
+                    It was also a useful way to get hands-on experience with agentic and retrieval-oriented tooling. I was interested in the
+                    Langflow ecosystem, but I also wanted to understand the lower-level pieces directly: the API layer, the vector database,
+                    the embedding model, and the ingestion script that turns raw CSV data into something the chatbot can actually use.
+                </p>
+
+                <figure class="cheese-figure">
+                    <svg viewBox="0 0 960 360" role="img" aria-label="Diagram of the Cheese Agent workflow">
+                        <defs>
+                            <linearGradient id="cheeseNode" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#f4c46a"/>
+                                <stop offset="100%" stop-color="#d68c45"/>
+                            </linearGradient>
+                        </defs>
+                        <rect x="70" y="130" width="160" height="92" rx="20" fill="url(#cheeseNode)"/>
+                        <rect x="290" y="70" width="160" height="92" rx="20" fill="#f5efe5"/>
+                        <rect x="290" y="200" width="160" height="92" rx="20" fill="#f5efe5"/>
+                        <rect x="515" y="130" width="170" height="92" rx="20" fill="#f5efe5"/>
+                        <rect x="745" y="130" width="150" height="92" rx="20" fill="url(#cheeseNode)"/>
+
+                        <text x="150" y="168" text-anchor="middle" font-size="24" font-family="Georgia, serif" fill="#1b1712">Query</text>
+                        <text x="150" y="196" text-anchor="middle" font-size="16" font-family="Arial, sans-serif" fill="#2c241a">user message</text>
+
+                        <text x="370" y="108" text-anchor="middle" font-size="22" font-family="Georgia, serif" fill="#17130f">Embed</text>
+                        <text x="370" y="136" text-anchor="middle" font-size="15" font-family="Arial, sans-serif" fill="#40372e">query vector</text>
+
+                        <text x="370" y="238" text-anchor="middle" font-size="22" font-family="Georgia, serif" fill="#17130f">Retrieve</text>
+                        <text x="370" y="266" text-anchor="middle" font-size="15" font-family="Arial, sans-serif" fill="#40372e">AstraDB matches</text>
+
+                        <text x="600" y="168" text-anchor="middle" font-size="23" font-family="Georgia, serif" fill="#17130f">Compose</text>
+                        <text x="600" y="196" text-anchor="middle" font-size="15" font-family="Arial, sans-serif" fill="#40372e">prompt + context</text>
+
+                        <text x="820" y="168" text-anchor="middle" font-size="24" font-family="Georgia, serif" fill="#1b1712">Answer</text>
+                        <text x="820" y="196" text-anchor="middle" font-size="16" font-family="Arial, sans-serif" fill="#2c241a">chat response</text>
+
+                        <path class="cheese-flow" d="M230 176 H290" fill="none" stroke="#f0ba5c" stroke-width="4" stroke-linecap="round"/>
+                        <path class="cheese-flow" d="M450 116 H515" fill="none" stroke="#d7dbe3" stroke-width="4" stroke-linecap="round"/>
+                        <path class="cheese-flow" d="M450 246 H515" fill="none" stroke="#d7dbe3" stroke-width="4" stroke-linecap="round"/>
+                        <path class="cheese-flow" d="M685 176 H745" fill="none" stroke="#f0ba5c" stroke-width="4" stroke-linecap="round"/>
+                        <path class="cheese-flow" d="M600 130 C600 82, 520 52, 450 78" fill="none" stroke="#6dd3c8" stroke-width="3"/>
+                        <path class="cheese-flow" d="M600 222 C600 274, 520 304, 450 274" fill="none" stroke="#6dd3c8" stroke-width="3"/>
+
+                        <circle class="cheese-pulse" cx="600" cy="176" r="10" fill="#6dd3c8"/>
+                    </svg>
+                    <figcaption class="cheese-figure__caption">
+                        Figure 1. A simplified request pipeline: the user query is embedded, matched against AstraDB, combined with retrieved
+                        context, and then sent to the model to produce the final answer.
+                    </figcaption>
+                </figure>
+
+                <h2>How it works</h2>
+                <p>
+                    At a high level, the backend exposes a single chat endpoint in FastAPI. When a user sends a question, the backend embeds
+                    that query with OpenAI, uses the resulting vector to search the AstraDB collection, and then passes the retrieved cheese
+                    knowledge into a generation step. In other words, the chatbot does not answer from nowhere; it answers from the retrieved
+                    context that the pipeline assembles for it.
+                </p>
+                <p>
+                    The data side matters a lot here. I used CSV-based source files and a separate ingestion script to load that material into
+                    the database ahead of time. That made the project more concrete, because I had to think not just about prompts, but also
+                    about how records are shaped, what gets embedded, and how retrieval quality depends on those choices.
+                </p>
+
+                <h2>What I focused on in the implementation</h2>
+                <p>
+                    One part I liked a lot was the split between the backend and the frontend. The frontend stays deliberately simple: plain
+                    HTML, CSS, and JavaScript, no framework, no build step. That let me spend more attention on the backend logic instead of
+                    fighting a heavy UI toolchain. On the other side, the FastAPI service had a very clear responsibility: receive a message,
+                    run retrieval, call the model, and return an answer.
+                </p>
+                <p>
+                    The vector database was probably the most educational part. Using AstraDB made the project feel closer to a production
+                    architecture than a notebook demo. I had to manage the collection, the embedding model choice, the ingestion process, and
+                    the relationship between retrieval and the final answer quality. Small decisions there had visible effects on how grounded
+                    the responses felt.
+                </p>
+                <p>
+                    I also added some deliberately non-serious features around the core chat flow, like slash commands, trivia, and image
+                    interactions. I liked that contrast. The project has a playful outer layer, but underneath it there is still a retrieval
+                    pipeline, an API boundary, environment configuration, deployment setup, and data loading scripts that all have to behave
+                    correctly.
+                </p>
+                <p>
+                    If you want to look at the code itself, the repository is here:
+                    <a href="https://github.com/mariia-osipova/cheese-agent" target="_blank" rel="noopener noreferrer">github.com/mariia-osipova/cheese-agent</a>.
+                </p>
+
+                <h2>What seems promising so far</h2>
+                <p>
+                    What feels most promising to me is that this kind of project forces several useful skills to meet in one place. It is not
+                    only about prompting. It is about data preparation, embeddings, retrieval, API design, frontend integration, and
+                    deployment. That makes it a better learning project than a toy chatbot that only wraps one model call.
+                </p>
+                <p>
+                    It also made some limitations very obvious. Retrieval quality depends heavily on the dataset and on how the source text is
+                    chunked and stored. The model can still sound confident even when the retrieved context is weak. So a lot of the real work
+                    is in building a better pipeline around the model rather than assuming the model alone is enough.
+                </p>
+
+                <h2>Closing thoughts</h2>
+                <p>
+                    For me, Cheese Agent ended up being a good technical project because it sits between experimentation and engineering. It
+                    gave me a chance to work with ideas connected to Langflow-style agent systems and retrieval pipelines, but also to build
+                    the concrete infrastructure around them: API routes, database integration, ingestion scripts, environment variables, and a
+                    frontend that could actually present the result.
+                </p>
+                <p>
+                    That is probably what I value most in it. It is not just a themed chatbot; it is a compact full-stack AI project where
+                    the model, the database, the data pipeline, and the user interface all have to line up. If you want to explore it, the
+                    project is here:
+                    <a href="https://github.com/mariia-osipova/cheese-agent" target="_blank" rel="noopener noreferrer">Cheese Agent on GitHub</a>.
+                </p>
+            </section>
+        </div>
+        <footer class="content__footer">
+            <div class="entry-wrapper">
+                <p class="content__updated">This article was updated on August 25, 2026</p>
+                <div class="content__actions">
+                    <ul class="content__tag">
+                        <li><a href="https://mariia-osipova.github.io/my-page/tags/ai-systems/">AI systems</a></li>
+                        <li><a href="https://mariia-osipova.github.io/my-page/tags/ml/">ML</a></li>
+                    </ul>
+                    <div class="content__share">
+                        <button class="btn--icon content__share-button js-content__share-button">
+                            <svg width="20" height="20" aria-hidden="true"><use xlink:href="https://mariia-osipova.github.io/my-page/assets/svg/svg-map.svg#share"></use></svg>
+                            <span>Share It</span>
+                        </button>
+                        <div class="content__share-popup js-content__share-popup">
+                            <a href="https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fmariia-osipova.github.io%2Fmy-page%2Fcheese-agent/&amp;media=https%3A%2F%2Fmariia-osipova.github.io%2Fmy-page%2Fmedia%2Fposts%2F5%2FGroup-42-3.png&amp;description=Cheese%20Agent%3A%20A%20FastAPI%20Chatbot%20with%20Vector%20Search" class="js-share pinterest" rel="nofollow noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use xlink:href="https://mariia-osipova.github.io/my-page/assets/svg/svg-map.svg#pinterest"/></svg> <span>Pinterest</span></a>
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fmariia-osipova.github.io%2Fmy-page%2Fcheese-agent/" class="js-share linkedin" rel="nofollow noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use xlink:href="https://mariia-osipova.github.io/my-page/assets/svg/svg-map.svg#linkedin"/></svg> <span>LinkedIn</span></a>
+                            <a href="https://api.whatsapp.com/send?text=Cheese%20Agent%3A%20A%20FastAPI%20Chatbot%20with%20Vector%20Search%20https%3A%2F%2Fmariia-osipova.github.io%2Fmy-page%2Fcheese-agent/" class="js-share whatsapp" rel="nofollow noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use xlink:href="https://mariia-osipova.github.io/my-page/assets/svg/svg-map.svg#whatsapp"/></svg> <span>WhatsApp</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="content__bio bio">
+                    <div>
+                        <h3 class="h4 bio__name"><a href="https://mariia-osipova.github.io/my-page/authors/mariia-osipova/" rel="author">Mariia Osipova</a></h3>
+                    </div>
+                </div>
+            </div>
+            <nav class="content__nav">
+                <div class="wrapper">
+                    <div class="content__nav-inner">
+                        <div class="content__nav-next">
+                            <a href="https://mariia-osipova.github.io/my-page/my-second-post.html" class="content__nav-link" rel="next">
+                                <div><span>Next</span> my second post</div>
+                                <figure class="content__nav-image"><img src="https://mariia-osipova.github.io/my-page/media/posts/6/responsive/33img-xs.png" class="lazyload" loading="lazy" alt="" height="714" width="714"></figure>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </footer>
+    </article>
+</main>
+<footer class="footer footer--glued">
+    <div class="wrapper">
+        <div class="footer__copyright"><p>jeje</p></div>
+        <button id="backToTop" class="footer__bttop" aria-label="Back to top" title="Back to top">
+            <svg width="20" height="20"><use xlink:href="https://mariia-osipova.github.io/my-page/assets/svg/svg-map.svg#toparrow"/></svg>
+        </button>
+    </div>
+</footer>
+<script defer="defer" src="/my-page/assets/js/shared-topbar.js?v=4"></script>
+<script defer="defer" src="https://mariia-osipova.github.io/my-page/assets/js/scripts.min.js?v=d0fc1030089a37f93a2d51bf6d07565c"></script>
+<script>
+    window.publiiThemeMenuConfig = {mobileMenuMode:'overlay',animationSpeed:300,submenuWidth:200,doubleClickTime:500,mobileMenuExpandableSubmenus:true,relatedContainerForOverlayMenuSelector:'.top'};
+</script>
+<script>
+    var images = document.querySelectorAll('img[loading]');
+    for (var i = 0; i < images.length; i++) {
+        if (images[i].complete) {
+            images[i].classList.add('is-loaded');
+        } else {
+            images[i].addEventListener('load', function () {
+                this.classList.add('is-loaded');
+            }, false);
+        }
+    }
+</script>
+<script defer src="/my-page/assets/js/card-links.js?v=3"></script>
+</body>
+</html>
