@@ -1193,6 +1193,9 @@ textarea {
 .hero__content {
   padding-bottom: calc(var(--baseline) * 6 + 1.5vw);
 }
+.post-template .hero__content {
+  padding-bottom: calc(var(--baseline) * 6 + 1.5vw - 16px);
+}
 .hero__content h1 > sup {
   font-size: 1.066666667rem;
   vertical-align: top;
@@ -1325,6 +1328,9 @@ textarea {
   width: 1rem;
   vertical-align: middle;
 }
+.post-template .content__meta .feed__author + .feed__date::before {
+  display: none;
+}
 .feed__readmore {
   margin-top: calc(var(--baseline) * 4 + 0.25vw);
 }
@@ -1374,6 +1380,10 @@ textarea {
 }
 .content__meta--centered {
   justify-content: center;
+}
+.post-template .content__meta .feed__date {
+  position: relative;
+  top: 1px;
 }
 .content__entry {
   margin-top: calc(var(--baseline) * 6 + 1.5vw);
