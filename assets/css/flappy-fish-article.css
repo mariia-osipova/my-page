@@ -1,0 +1,97 @@
+.fish-project .fish-motion-figure,
+.fish-project .project-diagram {
+  margin: 2rem 0;
+}
+
+.fish-project .fish-motion-figure {
+  overflow: hidden;
+  border: 1px solid rgba(52, 126, 91, 0.16);
+  border-radius: 8px;
+  background: #fdfffa;
+}
+
+.fish-project .fish-motion-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.fish-project .fish-motion-figure figcaption,
+.fish-project .project-diagram figcaption {
+  padding: 0.75rem 1rem 1rem;
+  color: rgba(24, 42, 36, 0.72);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.fish-project .project-diagram {
+  overflow-x: auto;
+  padding: 1rem;
+  border: 1px solid rgba(52, 126, 91, 0.16);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #fdfffa 0%, #f6fff8 100%);
+  animation: fishDiagramEnter 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.fish-project .project-diagram .mermaid {
+  display: flex;
+  min-width: 620px;
+  justify-content: center;
+  margin: 0;
+  color: #182a24;
+  font-family: inherit;
+}
+
+.fish-project .project-diagram svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.fish-project .project-diagram svg .edgePaths path {
+  stroke-dasharray: 14 10 !important;
+  animation: fishDiagramFlow 1.6s linear infinite;
+}
+
+.fish-project .project-diagram svg .node rect,
+.fish-project .project-diagram svg .node polygon,
+.fish-project .project-diagram svg .node circle {
+  filter: drop-shadow(0 6px 12px rgba(17, 88, 80, 0.08));
+}
+
+@keyframes fishDiagramEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fishDiagramFlow {
+  to {
+    stroke-dashoffset: -48;
+  }
+}
+
+@media (max-width: 700px) {
+  .fish-project .project-diagram {
+    margin-right: -1rem;
+    margin-left: -1rem;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+
+  .fish-project .project-diagram .mermaid {
+    min-width: 560px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fish-project .project-diagram,
+  .fish-project .project-diagram svg .edgePaths path {
+    animation: none !important;
+  }
+}
