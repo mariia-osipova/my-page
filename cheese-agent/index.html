@@ -4,25 +4,25 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Cheese Agent: A FastAPI Chatbot with Vector Search - Mariia Osipova</title>
-    <meta name="description" content="AI-powered cheese agent built with FastAPI, AstraDB vector search, OpenAI, and a lightweight JS frontend.">
+    <title>Cheese Agent: A FastAPI RAG Chatbot with Vector Search - Mariia Osipova</title>
+    <meta name="description" content="AI-powered RAG cheese agent built with FastAPI, AstraDB vector search, OpenAI, and a lightweight JS frontend.">
     <meta name="generator" content="Publii Open-Source CMS for Static Site">
     <link rel="canonical" href="https://mariia-osipova.github.io/my-page/cheese-agent/">
     <link rel="alternate" type="application/atom+xml" href="https://mariia-osipova.github.io/my-page/feed.xml" title="Mariia Osipova - RSS">
     <link rel="alternate" type="application/json" href="https://mariia-osipova.github.io/my-page/feed.json" title="Mariia Osipova - JSON">
-    <meta property="og:title" content="Cheese Agent: A FastAPI Chatbot with Vector Search">
+    <meta property="og:title" content="Cheese Agent: A FastAPI RAG Chatbot with Vector Search">
     <meta property="og:image" content="/my-page/media/posts/5/Group-42-3.png">
     <meta property="og:image:width" content="2440">
     <meta property="og:image:height" content="1525">
     <meta property="og:site_name" content="Mariia Osipova">
-    <meta property="og:description" content="AI-powered cheese agent built with FastAPI, AstraDB vector search, OpenAI, and a lightweight JS frontend.">
+    <meta property="og:description" content="AI-powered RAG cheese agent built with FastAPI, AstraDB vector search, OpenAI, and a lightweight JS frontend.">
     <meta property="og:url" content="https://mariia-osipova.github.io/my-page/cheese-agent/">
     <meta property="og:type" content="article">
     <link rel="shortcut icon" href="https://mariia-osipova.github.io/my-page/media/website/Group-15.png" type="image/x-icon">
     <link rel="stylesheet" href="/my-page/assets/css/style.css?v=5faf7bef3a05d104ff83ae46bf6d7711b">
     <link rel="stylesheet" href="/my-page/assets/css/portfolio-topbar.css?v=9">
     <script type="application/ld+json">
-        {"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://mariia-osipova.github.io/my-page/cheese-agent/"},"headline":"Cheese Agent: A FastAPI Chatbot with Vector Search","datePublished":"2025-01-20T18:25-03:00","dateModified":"2026-08-25T12:00-03:00","image":{"@type":"ImageObject","url":"/my-page/media/posts/5/Group-42-3.png","height":1525,"width":2440},"description":"AI-powered cheese agent built with FastAPI, AstraDB vector search, OpenAI, and a lightweight JS frontend.","author":{"@type":"Person","name":"Mariia Osipova","url":"https://mariia-osipova.github.io/my-page/authors/mariia-osipova/"},"publisher":{"@type":"Organization","name":"Mariia Osipova"}}
+        {"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://mariia-osipova.github.io/my-page/cheese-agent/"},"headline":"Cheese Agent: A FastAPI RAG Chatbot with Vector Search","datePublished":"2025-01-20T18:25-03:00","dateModified":"2026-08-25T12:00-03:00","image":{"@type":"ImageObject","url":"/my-page/media/posts/5/Group-42-3.png","height":1525,"width":2440},"description":"AI-powered RAG cheese agent built with FastAPI, AstraDB vector search, OpenAI, and a lightweight JS frontend.","author":{"@type":"Person","name":"Mariia Osipova","url":"https://mariia-osipova.github.io/my-page/authors/mariia-osipova/"},"publisher":{"@type":"Organization","name":"Mariia Osipova"}}
     </script>
     <noscript>
         <style>
@@ -53,7 +53,7 @@
         <div class="hero">
             <header class="hero__content hero__content--centered">
                 <div class="wrapper">
-                    <h1>Cheese Agent: A FastAPI Chatbot with Vector Search</h1>
+                    <h1>Cheese Agent: A FastAPI RAG Chatbot with Vector Search</h1>
                     <div class="feed__meta content__meta content__meta--centered">
                         <a href="https://mariia-osipova.github.io/my-page/authors/mariia-osipova/" class="feed__author">Mariia Osipova</a>
                         <time datetime="2025-01-20T18:25" class="feed__date">January 20, 2025</time>
@@ -151,9 +151,11 @@
                 <p>
                     This post is about my experience building
                     <a href="https://github.com/mariia-osipova/cheese-agent" target="_blank" rel="noopener noreferrer">Cheese Agent</a>,
-                    a cheese-themed chatbot project with a FastAPI backend, OpenAI embeddings, AstraDB vector search, and a vanilla JS
-                    frontend. I wanted it to feel playful on the surface, but underneath it is really a small retrieval system with a clear
-                    data pipeline and a few moving parts that had to work together reliably.
+                    a cheese-themed RAG chatbot project with a FastAPI backend, OpenAI embeddings, AstraDB vector search, and a vanilla JS
+                    frontend. It is deployed at
+                    <a href="https://cheese-agent.ai.studio/" target="_blank" rel="noopener noreferrer">cheese-agent.ai.studio</a>.
+                    I wanted it to feel playful on the surface, but underneath it is really a small retrieval system with a clear data
+                    pipeline and a few moving parts that had to work together reliably.
                 </p>
 
                 <div class="cheese-abstract">
@@ -162,8 +164,8 @@
                         This is a short technical reflection on building
                         <a href="https://github.com/mariia-osipova/cheese-agent" target="_blank" rel="noopener noreferrer">Cheese Agent</a>,
                         especially the parts that made it feel like a real systems project rather than just a UI experiment. The interesting
-                        work for me was connecting ingestion, embeddings, vector retrieval, prompting, and a lightweight frontend into one
-                        workflow that stayed understandable end to end.
+                        work for me was connecting ingestion, embeddings, vector retrieval, prompting, deployment, and a lightweight frontend
+                        into one retrieval-augmented generation workflow that stayed understandable end to end.
                     </p>
                 </div>
 
@@ -228,8 +230,8 @@
                 <p>
                     At a high level, the backend exposes a single chat endpoint in FastAPI. When a user sends a question, the backend embeds
                     that query with OpenAI, uses the resulting vector to search the AstraDB collection, and then passes the retrieved cheese
-                    knowledge into a generation step. In other words, the chatbot does not answer from nowhere; it answers from the retrieved
-                    context that the pipeline assembles for it.
+                    knowledge into a generation step. In other words, it follows a retrieval-augmented generation, or RAG, pattern: the
+                    chatbot does not answer from nowhere; it answers from the retrieved context that the pipeline assembles for it.
                 </p>
                 <p>
                     The data side matters a lot here. I used CSV-based source files and a separate ingestion script to load that material into
@@ -257,7 +259,9 @@
                     correctly.
                 </p>
                 <p>
-                    If you want to look at the code itself, the repository is here:
+                    If you want to try it, the deployed app is here:
+                    <a href="https://cheese-agent.ai.studio/" target="_blank" rel="noopener noreferrer">cheese-agent.ai.studio</a>.
+                    The code is here:
                     <a href="https://github.com/mariia-osipova/cheese-agent" target="_blank" rel="noopener noreferrer">github.com/mariia-osipova/cheese-agent</a>.
                 </p>
 
@@ -283,7 +287,9 @@
                 <p>
                     That is probably what I value most in it. It is not just a themed chatbot; it is a compact full-stack AI project where
                     the model, the database, the data pipeline, and the user interface all have to line up. If you want to explore it, the
-                    project is here:
+                    live project is here:
+                    <a href="https://cheese-agent.ai.studio/" target="_blank" rel="noopener noreferrer">Cheese Agent deployed app</a>, and
+                    the code is here:
                     <a href="https://github.com/mariia-osipova/cheese-agent" target="_blank" rel="noopener noreferrer">Cheese Agent on GitHub</a>.
                 </p>
             </section>
@@ -302,9 +308,9 @@
                             <span>Share It</span>
                         </button>
                         <div class="content__share-popup js-content__share-popup">
-                            <a href="https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fmariia-osipova.github.io%2Fmy-page%2Fcheese-agent/&amp;media=https%3A%2F%2Fmariia-osipova.github.io%2Fmy-page%2Fmedia%2Fposts%2F5%2FGroup-42-3.png&amp;description=Cheese%20Agent%3A%20A%20FastAPI%20Chatbot%20with%20Vector%20Search" class="js-share pinterest" rel="nofollow noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use xlink:href="https://mariia-osipova.github.io/my-page/assets/svg/svg-map.svg#pinterest"/></svg> <span>Pinterest</span></a>
+                            <a href="https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fmariia-osipova.github.io%2Fmy-page%2Fcheese-agent/&amp;media=https%3A%2F%2Fmariia-osipova.github.io%2Fmy-page%2Fmedia%2Fposts%2F5%2FGroup-42-3.png&amp;description=Cheese%20Agent%3A%20A%20FastAPI%20RAG%20Chatbot%20with%20Vector%20Search" class="js-share pinterest" rel="nofollow noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use xlink:href="https://mariia-osipova.github.io/my-page/assets/svg/svg-map.svg#pinterest"/></svg> <span>Pinterest</span></a>
                             <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fmariia-osipova.github.io%2Fmy-page%2Fcheese-agent/" class="js-share linkedin" rel="nofollow noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use xlink:href="https://mariia-osipova.github.io/my-page/assets/svg/svg-map.svg#linkedin"/></svg> <span>LinkedIn</span></a>
-                            <a href="https://api.whatsapp.com/send?text=Cheese%20Agent%3A%20A%20FastAPI%20Chatbot%20with%20Vector%20Search%20https%3A%2F%2Fmariia-osipova.github.io%2Fmy-page%2Fcheese-agent/" class="js-share whatsapp" rel="nofollow noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use xlink:href="https://mariia-osipova.github.io/my-page/assets/svg/svg-map.svg#whatsapp"/></svg> <span>WhatsApp</span></a>
+                            <a href="https://api.whatsapp.com/send?text=Cheese%20Agent%3A%20A%20FastAPI%20RAG%20Chatbot%20with%20Vector%20Search%20https%3A%2F%2Fmariia-osipova.github.io%2Fmy-page%2Fcheese-agent/" class="js-share whatsapp" rel="nofollow noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use xlink:href="https://mariia-osipova.github.io/my-page/assets/svg/svg-map.svg#whatsapp"/></svg> <span>WhatsApp</span></a>
                         </div>
                     </div>
                 </div>
