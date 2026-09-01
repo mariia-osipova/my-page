@@ -1,6 +1,10 @@
+.fish-project {
+  min-width: 0;
+}
+
 .fish-project .fish-motion-figure,
 .fish-project .project-diagram,
-.fish-project .fish-photo-gallery {
+.fish-project .fish-event-gallery {
   margin: clamp(1.75rem, 4vw, 2.75rem) 0;
 }
 
@@ -54,26 +58,59 @@
   filter: drop-shadow(0 6px 12px rgba(17, 88, 80, 0.08));
 }
 
-.fish-project .fish-photo-gallery {
+.fish-project .fish-event-gallery {
   display: grid;
-  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
-  gap: clamp(0.8rem, 2vw, 1.2rem);
-  align-items: end;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  column-gap: clamp(1rem, 3vw, 1.8rem);
+  row-gap: clamp(0.9rem, 2.4vw, 1.5rem);
+  align-items: start;
+  min-width: 0;
 }
 
-.fish-project .fish-photo-gallery figure {
+.fish-project .fish-event-gallery figure {
   margin: 0;
+  min-width: 0;
 }
 
-.fish-project .fish-photo-gallery figure:first-child {
-  grid-row: span 2;
+.fish-project .fish-event-gallery__wide {
+  grid-column: 1 / -1;
 }
 
-.fish-project .fish-photo-gallery img {
+.fish-project .fish-event-gallery__poster {
+  max-width: min(100%, 18rem);
+  justify-self: start;
+}
+
+.fish-project .fish-event-gallery__moment {
+  max-width: min(100%, 22rem);
+  justify-self: end;
+  margin-top: clamp(0.6rem, 4vw, 2.2rem);
+}
+
+.fish-project .fish-event-gallery img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   border-radius: 6px;
+}
+
+.fish-project .fish-event-gallery__wide img {
+  aspect-ratio: 4 / 3;
+  object-position: center;
+}
+
+.fish-project .fish-event-gallery__poster img,
+.fish-project .fish-event-gallery__moment img {
+  aspect-ratio: 3 / 4;
+}
+
+.fish-project .fish-event-gallery figcaption {
+  margin-top: 0.55rem;
+  color: rgba(24, 42, 36, 0.68);
+  font-size: 0.82rem;
+  line-height: 1.35;
+  overflow-wrap: break-word;
 }
 
 @keyframes fishDiagramEnter {
@@ -94,6 +131,16 @@
 }
 
 @media (max-width: 700px) {
+  .fish-project {
+    max-width: calc(100vw - var(--page-margin) * 2);
+  }
+
+  .fish-project h2,
+  .fish-project p,
+  .fish-project figcaption {
+    overflow-wrap: break-word;
+  }
+
   .fish-project .project-diagram {
     margin-right: 0;
     margin-left: 0;
@@ -103,12 +150,19 @@
     min-width: 560px;
   }
 
-  .fish-project .fish-photo-gallery {
+  .fish-project .fish-event-gallery {
     grid-template-columns: 1fr;
   }
 
-  .fish-project .fish-photo-gallery figure:first-child {
-    grid-row: auto;
+  .fish-project .fish-event-gallery__poster,
+  .fish-project .fish-event-gallery__moment {
+    max-width: 100%;
+    justify-self: stretch;
+    margin-top: 0;
+  }
+
+  .fish-project .fish-event-gallery img {
+    height: auto;
   }
 }
 
