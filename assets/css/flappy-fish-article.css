@@ -1,13 +1,10 @@
 .fish-project .fish-motion-figure,
 .fish-project .project-diagram {
-  margin: 2rem 0;
+  margin: clamp(1.75rem, 4vw, 2.75rem) 0;
 }
 
 .fish-project .fish-motion-figure {
-  overflow: hidden;
-  border: 1px solid rgba(52, 126, 91, 0.16);
-  border-radius: 8px;
-  background: #fdfffa;
+  overflow: visible;
 }
 
 .fish-project .fish-motion-figure img {
@@ -18,7 +15,8 @@
 
 .fish-project .fish-motion-figure figcaption,
 .fish-project .project-diagram figcaption {
-  padding: 0.75rem 1rem 1rem;
+  margin-top: 0.7rem;
+  padding: 0;
   color: rgba(24, 42, 36, 0.72);
   font-size: 0.9rem;
   line-height: 1.45;
@@ -26,10 +24,7 @@
 
 .fish-project .project-diagram {
   overflow-x: auto;
-  padding: 1rem;
-  border: 1px solid rgba(52, 126, 91, 0.16);
-  border-radius: 8px;
-  background: linear-gradient(180deg, #fdfffa 0%, #f6fff8 100%);
+  padding: 0.25rem 0 0.5rem;
   animation: fishDiagramEnter 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -77,11 +72,8 @@
 
 @media (max-width: 700px) {
   .fish-project .project-diagram {
-    margin-right: -1rem;
-    margin-left: -1rem;
-    border-right: 0;
-    border-left: 0;
-    border-radius: 0;
+    margin-right: 0;
+    margin-left: 0;
   }
 
   .fish-project .project-diagram .mermaid {
