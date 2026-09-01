@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/my-page/assets/css/style.css?v=5faf7bef3a05d104ff83ae46bf6d7711b">
     <link rel="stylesheet" href="/my-page/assets/css/portfolio-topbar.css?v=9">
     <script type="application/ld+json">
-        {"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://mariia-osipova.github.io/my-page/cheese-agent/"},"headline":"Cheese Agent: A FastAPI RAG Chatbot with Vector Search","datePublished":"2025-01-20T18:25-03:00","dateModified":"2026-08-25T12:00-03:00","image":{"@type":"ImageObject","url":"/my-page/media/posts/5/Group-42-3.png","height":1525,"width":2440},"description":"AI-powered RAG cheese agent built with FastAPI, AstraDB vector search, OpenAI, and a lightweight JS frontend.","author":{"@type":"Person","name":"Mariia Osipova","url":"https://mariia-osipova.github.io/my-page/authors/mariia-osipova/"},"publisher":{"@type":"Organization","name":"Mariia Osipova"}}
+        {"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://mariia-osipova.github.io/my-page/cheese-agent/"},"headline":"Cheese Agent: A FastAPI RAG Chatbot with Vector Search","datePublished":"2025-01-20T18:25-03:00","dateModified":"2026-09-01T12:00-03:00","image":{"@type":"ImageObject","url":"/my-page/media/posts/5/Group-42-3.png","height":1525,"width":2440},"description":"AI-powered RAG cheese agent built with FastAPI, AstraDB vector search, OpenAI, and a lightweight JS frontend.","author":{"@type":"Person","name":"Mariia Osipova","url":"https://mariia-osipova.github.io/my-page/authors/mariia-osipova/"},"publisher":{"@type":"Organization","name":"Mariia Osipova"}}
     </script>
     <noscript>
         <style>
@@ -127,6 +127,40 @@
                     transform-origin: center;
                 }
 
+                .cheese-photo-gallery {
+                    display: grid;
+                    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+                    align-items: end;
+                    gap: clamp(0.95rem, 3vw, 1.65rem);
+                    margin: clamp(1.75rem, 4vw, 2.75rem) 0 0.5rem;
+                }
+
+                .cheese-photo-gallery figure {
+                    margin: 0;
+                    min-width: 0;
+                }
+
+                .cheese-photo-gallery__side {
+                    margin-bottom: clamp(1rem, 5vw, 3.25rem);
+                }
+
+                .cheese-photo-gallery img {
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                    aspect-ratio: 4 / 3;
+                    object-fit: cover;
+                    border-radius: 6px;
+                }
+
+                .cheese-photo-gallery figcaption {
+                    margin-top: 0.55rem;
+                    color: rgba(31, 29, 26, 0.68);
+                    font-size: 0.82rem;
+                    line-height: 1.35;
+                    overflow-wrap: break-word;
+                }
+
                 @keyframes cheese-dash {
                     to {
                         stroke-dashoffset: -180;
@@ -145,6 +179,16 @@
                     }
                 }
 
+                @media (max-width: 700px) {
+                    .cheese-photo-gallery {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .cheese-photo-gallery__side {
+                        margin-bottom: 0;
+                    }
+                }
+
             </style>
 
             <section class="cheese-paper">
@@ -155,31 +199,29 @@
                     frontend. It is deployed at
                     <a href="https://cheese-agent.ai.studio/" target="_blank" rel="noopener noreferrer">cheese-agent.ai.studio</a>.
                     I wanted it to feel playful on the surface, but underneath it is really a small retrieval system with a clear data
-                    pipeline and a few moving parts that had to work together reliably.
+                    pipeline and a few moving parts that had to work together.
                 </p>
 
-                <div class="cheese-abstract">
-                    <strong>What this post is</strong>
-                    <p>
-                        This is a short technical reflection on building
-                        <a href="https://github.com/mariia-osipova/cheese-agent" target="_blank" rel="noopener noreferrer">Cheese Agent</a>,
-                        especially the parts that made it feel like a real systems project rather than just a UI experiment. The interesting
-                        work for me was connecting ingestion, embeddings, vector retrieval, prompting, deployment, and a lightweight frontend
-                        into one retrieval-augmented generation workflow that stayed understandable end to end.
-                    </p>
-                </div>
-
-                <h2>Why I made it</h2>
+                <h2>Where the idea came from</h2>
                 <p>
-                    I wanted to build something that combined an interface people would actually enjoy using with a backend architecture that
-                    forced me to think about retrieval quality, data organization, and deployment. A cheese chatbot is a playful format, but
-                    it is still a good setting for technical questions: how to structure the source data, how to embed it, how to retrieve
-                    the right chunks, and how to keep the model grounded in that context.
+                    The idea for this project came to me during my first semester at university. I wanted to build something playful:
+                    an interface people would actually enjoy using, paired with a backend architecture that would teach me something along the way.
+                    It felt like the perfect balance between learning and doing something delightfully cheesy.
                 </p>
+
                 <p>
-                    It was also a useful way to get hands-on experience with agentic and retrieval-oriented tooling. I was interested in the
-                    Langflow ecosystem, but I also wanted to understand the lower-level pieces directly: the API layer, the vector database,
-                    the embedding model, and the ingestion script that turns raw CSV data into something the chatbot can actually use.
+                    I knew I wanted to use a small dataset for a RAG chatbot, and while looking for random datasets online,
+                    I happened to come across the
+                    <a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday repository</a>,
+                    which collects free datasets on GitHub. That is where the idea of using cheese data came from.
+                    It was simply the first dataset I found funny enough to build a project around.
+                </p>
+
+                <p>
+                    Despite its playful concept, Cheese Agent still presented some serious technical questions:
+                    how to structure the source data, generate embeddings, retrieve the right chunks,
+                    and keep the model grounded in the retrieved context.
+                    It was also a useful way to get hands-on experience with agentic workflows and retrieval-oriented tooling.
                 </p>
 
                 <figure class="cheese-figure">
@@ -292,11 +334,26 @@
                     the code is here:
                     <a href="https://github.com/mariia-osipova/cheese-agent" target="_blank" rel="noopener noreferrer">Cheese Agent on GitHub</a>.
                 </p>
+
+                <h2 id="project-snapshots">Project Snapshots</h2>
+                <p>
+                    A couple of photos from the Cheese Agent build and testing sessions.
+                </p>
+                <div class="cheese-photo-gallery">
+                    <figure>
+                        <img src="/my-page/cheese-agent/img.png" loading="lazy" height="480" width="640" alt="Mariia testing the Cheese Agent project with a cheese-themed visual">
+                        <figcaption>Testing the cheese theme while building the RAG chatbot interface.</figcaption>
+                    </figure>
+                    <figure class="cheese-photo-gallery__side">
+                        <img src="/my-page/cheese-agent/img_1.png" loading="lazy" height="480" width="640" alt="Cheese Agent project testing moment with a cheese package visual">
+                        <figcaption>Another project moment from the same playful cheese-data experiment.</figcaption>
+                    </figure>
+                </div>
             </section>
         </div>
         <footer class="content__footer">
             <div class="entry-wrapper">
-                <p class="content__updated">This article was updated on August 25, 2026</p>
+                <p class="content__updated">This article was updated on September 1, 2026</p>
                 <div class="content__actions">
                     <ul class="content__tag">
                         <li><a href="https://mariia-osipova.github.io/my-page/tags/ai-systems/">AI systems</a></li>
