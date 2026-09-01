@@ -1,5 +1,6 @@
 .fish-project .fish-motion-figure,
-.fish-project .project-diagram {
+.fish-project .project-diagram,
+.fish-project .fish-photo-gallery {
   margin: clamp(1.75rem, 4vw, 2.75rem) 0;
 }
 
@@ -53,6 +54,28 @@
   filter: drop-shadow(0 6px 12px rgba(17, 88, 80, 0.08));
 }
 
+.fish-project .fish-photo-gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+  gap: clamp(0.8rem, 2vw, 1.2rem);
+  align-items: end;
+}
+
+.fish-project .fish-photo-gallery figure {
+  margin: 0;
+}
+
+.fish-project .fish-photo-gallery figure:first-child {
+  grid-row: span 2;
+}
+
+.fish-project .fish-photo-gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
 @keyframes fishDiagramEnter {
   from {
     opacity: 0;
@@ -78,6 +101,14 @@
 
   .fish-project .project-diagram .mermaid {
     min-width: 560px;
+  }
+
+  .fish-project .fish-photo-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .fish-project .fish-photo-gallery figure:first-child {
+    grid-row: auto;
   }
 }
 
