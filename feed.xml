@@ -83,7 +83,7 @@
             <summary type="html">
                 <![CDATA[
                         <img src="https://mariia-osipova.github.io/my-page/media/posts/7/fish-game-2x.png" alt="" />
-                    Dual-mode Pygame game used as a genetic-algorithm lab: manual play, AI fish simulation, fitness tracking, and web deployment.
+                    Group Pygame project that turns a Flappy Bird-style game into a genetic-algorithm experiment, comparing manual mode with an AI simulation mode where fish evolve over generations.
                 ]]>
             </summary>
         <content type="html">
