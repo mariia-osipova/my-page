@@ -154,6 +154,11 @@
                     margin: clamp(1.75rem, 4vw, 2.75rem) 0 0.5rem;
                 }
 
+                .cheese-photo-gallery--project {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    align-items: start;
+                }
+
                 .cheese-photo-gallery figure {
                     margin: 0;
                     min-width: 0;
@@ -163,6 +168,14 @@
                     margin-bottom: clamp(1rem, 5vw, 3.25rem);
                 }
 
+                .cheese-photo-gallery--project .cheese-photo-gallery__side {
+                    margin-bottom: 0;
+                }
+
+                .cheese-photo-gallery__wide {
+                    grid-column: 1 / -1;
+                }
+
                 .cheese-photo-gallery img {
                     display: block;
                     width: 100%;
@@ -170,6 +183,10 @@
                     aspect-ratio: 4 / 3;
                     object-fit: cover;
                     border-radius: 6px;
+                }
+
+                .cheese-photo-gallery__wide img {
+                    aspect-ratio: 1370 / 849;
                 }
 
                 .cheese-photo-gallery figcaption {
@@ -363,9 +380,9 @@
 
                 <h2 id="project-snapshots">Project Snapshots</h2>
                 <p>
-                    A couple of photos from the Cheese Agent build and testing sessions.
+                    A few photos and screen captures from the Cheese Agent build and testing sessions.
                 </p>
-                <div class="cheese-photo-gallery">
+                <div class="cheese-photo-gallery cheese-photo-gallery--project">
                     <figure>
                         <img src="/my-page/cheese-agent/img.png" loading="lazy" height="480" width="640" alt="Mariia testing the Cheese Agent project with a cheese-themed visual">
                         <figcaption>Testing the cheese theme while building the RAG chatbot interface.</figcaption>
@@ -373,6 +390,26 @@
                     <figure class="cheese-photo-gallery__side">
                         <img src="/my-page/cheese-agent/img_1.png" loading="lazy" height="480" width="640" alt="Cheese Agent project testing moment with a cheese package visual">
                         <figcaption>Another project moment from the same playful cheese-data experiment.</figcaption>
+                    </figure>
+                    <figure class="cheese-photo-gallery__wide">
+                        <img src="/my-page/cheese-agent/img_2.png" loading="lazy" height="849" width="1370" alt="Cheese Agent chat interface showing a slash command and cheese trivia response">
+                        <figcaption>The deployed chat interface responding to a slash command with a cheese fact.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="/my-page/cheese-agent/img_4.png" loading="lazy" height="480" width="640" alt="Webcam selfie with a sliced cheese overlay">
+                        <figcaption>A cheese-themed selfie from a project testing session.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="/my-page/cheese-agent/img_5.png" loading="lazy" height="480" width="640" alt="Classroom selfie with an Oltermanni cheese overlay">
+                        <figcaption>Bringing the cheese theme into the classroom demo mood.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="/my-page/cheese-agent/img_6.png" loading="lazy" height="480" width="640" alt="Classroom snapshot with a cheese package overlay">
+                        <figcaption>A final classroom snapshot from the Cheese Agent testing set.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="/my-page/cheese-agent/cheese-selfie%20%285%29.png" loading="lazy" height="480" width="640" alt="Classroom project snapshot with an Oltermanni cheese overlay">
+                        <figcaption>Another snapshot from the Cheese Agent testing and presentation context.</figcaption>
                     </figure>
                 </div>
             </section>
