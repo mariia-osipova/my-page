@@ -3,12 +3,36 @@
     <title>Mariia Osipova</title>
     <link href="https://mariia-osipova.github.io/my-page/feed.xml" rel="self" />
     <link href="https://mariia-osipova.github.io/my-page" />
-    <updated>2026-09-01T12:00:00-03:00</updated>
+    <updated>2026-10-26T00:00:00-03:00</updated>
     <author>
         <name>Mariia Osipova</name>
     </author>
     <id>https://mariia-osipova.github.io/my-page</id>
 
+    <entry><title>Hive</title><author><name>Mariia Osipova</name></author><link href="https://mariia-osipova.github.io/my-page/hive/"/><id>https://mariia-osipova.github.io/my-page/hive/</id><media:content url="https://mariia-osipova.github.io/my-page/media/posts/hive/hive-background.png" medium="image"/><published>2026-10-26T00:00:00-03:00</published><updated>2026-10-26T00:00:00-03:00</updated><summary>Hive game and self-play experiments: a CPU pilot, an original AZ-Hive run, and a check of the published Elo results.</summary><content type="html"><![CDATA[<section class="hive-project">
+<p>Hive began as a C++/SFML group project with Julieta Zanoni. I worked on graph connectivity, the Ladybug movement strategy, and the interface. I later made a browser version and used the game for experiments with self-play learning.</p>
+<p><a href="https://mariia-osipova.github.io/hive/" target="_blank" rel="noopener noreferrer">Play the game</a> · <a href="https://github.com/mariia-osipova/hive" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+<h2>Research</h2>
+<p>I worked from <a href="https://research.spec.org/icpe_proceedings/2022/proceedings/p145.pdf" target="_blank" rel="noopener noreferrer">The Cost of Reinforcement Learning for Game Engines: The AZ-Hive Case-study</a> (ICPE 2022). The study looks at how game representations and network configurations affect playing strength and training cost.</p>
+<p>My first implementation connects the C++ rules engine to Python with pybind11. A PyTorch network predicts move probabilities and a position value. Monte Carlo Tree Search uses those predictions during self-play. After training, each candidate plays against the selected model to decide whether it should replace it.</p>
+<h2>CPU pilot</h2>
+<p>The small CPU run used a 4.25-million-parameter network and 25 MCTS simulations per move. It completed six iterations and 60 self-play games in 5 minutes 47 seconds, with a peak process memory usage of about 690 MiB.</p>
+<p>The network learns two things: which move to choose (policy) and how likely the current player is to win (value). The figure below shows both training losses. Each line is one candidate, trained for three epochs.</p>
+<figure><a href="/my-page/media/posts/hive/training-loss.png"><img src="/my-page/media/posts/hive/training-loss.png" width="1440" height="1080" loading="lazy" alt="Policy and value loss during three training epochs for each of six candidate models."></a><figcaption>Training losses: move prediction above, game-outcome prediction below. Lower training loss does not by itself show stronger play.</figcaption></figure>
+<p>Each candidate then played 40 games against the previously selected model. None of the candidates passed the promotion test, so the selected model kept its initial weights.</p>
+<p>A separate held-out evaluation compared the models before and after training. Both won 72 of 100 games against random, with a paired 95% interval of 63–80%. Their direct comparison was 50–50. The final selected model had the same weights as the initial model.</p>
+<figure><a href="/my-page/media/posts/hive/evaluation.png?v=2"><img src="/my-page/media/posts/hive/evaluation.png?v=2" width="1440" height="810" loading="lazy" alt="Before training versus random: 72 wins and 28 losses. After training versus random: 72 wins and 28 losses. After versus before training: 50 wins and 50 losses."></a><figcaption>Each bar is 100 held-out games: blue = wins, orange = losses. “After training” refers to the final selected model, which kept the initial weights. No draws occurred.</figcaption></figure>
+<p>The last plot shows where the time went in each iteration: generating self-play games, training the candidate, and evaluating it.</p>
+<figure><a href="/my-page/media/posts/hive/training-time.png?v=2"><img src="/my-page/media/posts/hive/training-time.png?v=2" width="1440" height="810" loading="lazy" alt="Time spent on self-play, network training, and evaluation during each of six iterations, in seconds."></a><figcaption>Measured time per iteration. Small loop overhead is omitted; the full training process took 347.41 seconds.</figcaption></figure>
+<p>This pilot did not show an improvement in playing strength. It used one training seed, a compact network, and modified rules: a 29-ply limit and a four-neighbor queen condition. It does not reproduce the paper’s results. <a href="https://github.com/mariia-osipova/hive/tree/research/alphazero-hive-reproduction/research/alphazero-hive/experiments/cpu-pilot-2026-10-22" target="_blank" rel="noopener noreferrer">Full pilot report</a>.</p>
+<h2>Original AZ-Hive code</h2>
+<p>I then set up a separate run using the authors’ original C Beekeeper engine, Python training code, and 120.9-million-parameter network. The harness verifies the source archive and records the configuration, build flags, dependencies, and seed.</p>
+<p>The initial, untrained model won 28 of 50 games against random. The run stopped after 47 of the first 100 self-play games, before any optimization epochs or training iterations finished. These are partial execution results. The local Mac CPU environment also differs from the paper’s Linux/NVIDIA setup. <a href="https://github.com/mariia-osipova/hive/tree/research/az-hive-exact-reproduction/research/az-hive-exact/results/local-cpu-2026-10-22" target="_blank" rel="noopener noreferrer">Run log and summary</a>.</p>
+<h2>Elo check</h2>
+<p>I recalculated the ratings from the authors’ published tournament data using BayesElo. Its default first-move advantage of 32.8 matched the rounded ratings in Figure 6. Setting the advantage to zero, as described in the paper, changed some ratings by one or two points. The ranking stayed the same; the discrepancy is still unresolved.</p>
+<p>This calculation uses the published matches. No new tournament was run. <a href="https://github.com/mariia-osipova/hive/tree/research/az-hive-exact-reproduction/research/az-hive-exact/results/published-bayeselo.json" target="_blank" rel="noopener noreferrer">Results and commands</a>.</p>
+<p>Data: <a href="/my-page/media/posts/hive/epochs.csv">epoch losses</a>, <a href="/my-page/media/posts/hive/metrics.csv">iteration metrics</a>, <a href="/my-page/media/posts/hive/pilot-summary.json">evaluation summary</a>. <a href="/my-page/media/posts/hive/plot_results.py">Python script for the plots</a>.</p>
+</section>]]></content></entry>
     <entry>
         <title>6th post</title>
         <author>

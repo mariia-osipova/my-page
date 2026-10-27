@@ -1,0 +1,31 @@
+.hive-template .hero__image-wrapper {
+  max-width: var(--page-width);
+  height: auto;
+  margin-inline: auto;
+  background: transparent;
+  border-radius: 0;
+}
+
+.hive-template .hero__image-wrapper img {
+  height: auto;
+  border-radius: 0;
+}
+
+.hive-project figure {
+  margin-block: 2rem;
+}
+
+.hive-project figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hive-project figcaption {
+  margin-top: .5rem;
+  padding: 0;
+  color: var(--gray);
+  font-size: .85rem;
+  line-height: 1.5;
+  text-align: left;
+}

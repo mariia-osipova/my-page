@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hive - Mariia Osipova</title>
+<meta name="description" content="Hive game and self-play experiments: a CPU pilot, an original AZ-Hive run, and a check of the published Elo results.">
+<link rel="canonical" href="https://mariia-osipova.github.io/my-page/hive/">
+<link rel="alternate" type="application/atom+xml" href="https://mariia-osipova.github.io/my-page/feed.xml" title="Mariia Osipova - RSS">
+<link rel="alternate" type="application/json" href="https://mariia-osipova.github.io/my-page/feed.json" title="Mariia Osipova - JSON">
+<meta property="og:title" content="Hive">
+<meta property="og:description" content="Hive game and self-play experiments: a CPU pilot, an original AZ-Hive run, and a check of the published Elo results.">
+<meta property="og:site_name" content="Mariia Osipova">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mariia-osipova.github.io/my-page/hive/">
+<meta property="og:image" content="https://mariia-osipova.github.io/my-page/media/posts/hive/hive-background.png">
+<meta property="og:image:width" content="2258">
+<meta property="og:image:height" content="1592">
+<meta property="og:image:alt" content="Hive pieces on a pink hexagonal board">
+<link rel="shortcut icon" href="/my-page/media/website/Group-15.png" type="image/x-icon">
+<link rel="stylesheet" href="/my-page/assets/css/style.css?v=cards-55425c3-20260901">
+<link rel="stylesheet" href="/my-page/assets/css/portfolio-topbar.css?v=10">
+<link rel="stylesheet" href="/my-page/assets/css/hive-article.css?v=2">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Hive", "description": "Hive game and self-play experiments: a CPU pilot, an original AZ-Hive run, and a check of the published Elo results.", "mainEntityOfPage": "https://mariia-osipova.github.io/my-page/hive/", "datePublished": "2026-10-26T00:00:00-03:00", "dateModified": "2026-10-26T00:00:00-03:00", "image": "https://mariia-osipova.github.io/my-page/media/posts/hive/hive-background.png", "author": {"@type": "Person", "name": "Mariia Osipova", "url": "https://mariia-osipova.github.io/my-page/authors/mariia-osipova/"}}</script>
+<noscript><style>img[loading] { opacity:1; }</style></noscript>
+</head>
+<body class="post-template hive-template">
+<header class="top js-header"><a class="logo" href="https://mariia-osipova.github.io/my-page/">Mariia Osipova</a><nav class="navbar js-navbar"><button class="navbar__toggle js-toggle" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><span class="navbar__toggle-box"><span class="navbar__toggle-inner">Menu</span></span></button><ul class="navbar__menu"><li><a href="https://mariia-osipova.github.io/my-page/" title="home" target="_self"><span class="nav-link__label">home</span></a></li><li><a href="https://mariia-osipova.github.io/my-page/playgrounds/" target="_self"><span class="nav-link__label">playgrounds</span></a></li><li><a href="https://mariia-osipova.github.io/my-page/about/" target="_self"><span class="nav-link__label">about</span></a></li><li><a href="https://mariia-osipova.github.io/my-page/contact/" target="_self"><span class="nav-link__label">contact</span></a></li><li><a href="https://mariia-osipova.github.io/my-page/cv/" target="_self"><span class="nav-link__label">CV</span></a></li></ul></nav></header>
+<main class="post"><article class="content">
+<div class="hero">
+<header class="hero__content hero__content--centered"><div class="wrapper">
+<h1>Hive</h1>
+<div class="feed__meta content__meta content__meta--centered"><a href="https://mariia-osipova.github.io/my-page/authors/mariia-osipova/" class="feed__author">Mariia Osipova</a><time datetime="2026-10-26" class="feed__date">October 26, 2026</time></div>
+</div></header>
+<figure class="hero__image"><div class="hero__image-wrapper"><img src="/my-page/media/posts/hive/hive-background.png" width="2258" height="1592" loading="eager" fetchpriority="high" alt="Hive pieces on a pink hexagonal board"></div></figure>
+</div>
+<div class="entry-wrapper content__entry">
+<section class="hive-project">
+<p>Hive began as a C++/SFML group project with Julieta Zanoni. I worked on graph connectivity, the Ladybug movement strategy, and the interface. I later made a browser version and used the game for experiments with self-play learning.</p>
+<p><a href="https://mariia-osipova.github.io/hive/" target="_blank" rel="noopener noreferrer">Play the game</a> · <a href="https://github.com/mariia-osipova/hive" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+<h2>Research</h2>
+<p>I worked from <a href="https://research.spec.org/icpe_proceedings/2022/proceedings/p145.pdf" target="_blank" rel="noopener noreferrer">The Cost of Reinforcement Learning for Game Engines: The AZ-Hive Case-study</a> (ICPE 2022). The study looks at how game representations and network configurations affect playing strength and training cost.</p>
+<p>My first implementation connects the C++ rules engine to Python with pybind11. A PyTorch network predicts move probabilities and a position value. Monte Carlo Tree Search uses those predictions during self-play. After training, each candidate plays against the selected model to decide whether it should replace it.</p>
+<h2>CPU pilot</h2>
+<p>The small CPU run used a 4.25-million-parameter network and 25 MCTS simulations per move. It completed six iterations and 60 self-play games in 5 minutes 47 seconds, with a peak process memory usage of about 690 MiB.</p>
+<p>The network learns two things: which move to choose (policy) and how likely the current player is to win (value). The figure below shows both training losses. Each line is one candidate, trained for three epochs.</p>
+<figure><a href="/my-page/media/posts/hive/training-loss.png"><img src="/my-page/media/posts/hive/training-loss.png" width="1440" height="1080" loading="lazy" alt="Policy and value loss during three training epochs for each of six candidate models."></a><figcaption>Training losses: move prediction above, game-outcome prediction below. Lower training loss does not by itself show stronger play.</figcaption></figure>
+<p>Each candidate then played 40 games against the previously selected model. None of the candidates passed the promotion test, so the selected model kept its initial weights.</p>
+<p>A separate held-out evaluation compared the models before and after training. Both won 72 of 100 games against random, with a paired 95% interval of 63–80%. Their direct comparison was 50–50. The final selected model had the same weights as the initial model.</p>
+<figure><a href="/my-page/media/posts/hive/evaluation.png?v=2"><img src="/my-page/media/posts/hive/evaluation.png?v=2" width="1440" height="810" loading="lazy" alt="Before training versus random: 72 wins and 28 losses. After training versus random: 72 wins and 28 losses. After versus before training: 50 wins and 50 losses."></a><figcaption>Each bar is 100 held-out games: blue = wins, orange = losses. “After training” refers to the final selected model, which kept the initial weights. No draws occurred.</figcaption></figure>
+<p>The last plot shows where the time went in each iteration: generating self-play games, training the candidate, and evaluating it.</p>
+<figure><a href="/my-page/media/posts/hive/training-time.png?v=2"><img src="/my-page/media/posts/hive/training-time.png?v=2" width="1440" height="810" loading="lazy" alt="Time spent on self-play, network training, and evaluation during each of six iterations, in seconds."></a><figcaption>Measured time per iteration. Small loop overhead is omitted; the full training process took 347.41 seconds.</figcaption></figure>
+<p>This pilot did not show an improvement in playing strength. It used one training seed, a compact network, and modified rules: a 29-ply limit and a four-neighbor queen condition. It does not reproduce the paper’s results. <a href="https://github.com/mariia-osipova/hive/tree/research/alphazero-hive-reproduction/research/alphazero-hive/experiments/cpu-pilot-2026-10-22" target="_blank" rel="noopener noreferrer">Full pilot report</a>.</p>
+<h2>Original AZ-Hive code</h2>
+<p>I then set up a separate run using the authors’ original C Beekeeper engine, Python training code, and 120.9-million-parameter network. The harness verifies the source archive and records the configuration, build flags, dependencies, and seed.</p>
+<p>The initial, untrained model won 28 of 50 games against random. The run stopped after 47 of the first 100 self-play games, before any optimization epochs or training iterations finished. These are partial execution results. The local Mac CPU environment also differs from the paper’s Linux/NVIDIA setup. <a href="https://github.com/mariia-osipova/hive/tree/research/az-hive-exact-reproduction/research/az-hive-exact/results/local-cpu-2026-10-22" target="_blank" rel="noopener noreferrer">Run log and summary</a>.</p>
+<h2>Elo check</h2>
+<p>I recalculated the ratings from the authors’ published tournament data using BayesElo. Its default first-move advantage of 32.8 matched the rounded ratings in Figure 6. Setting the advantage to zero, as described in the paper, changed some ratings by one or two points. The ranking stayed the same; the discrepancy is still unresolved.</p>
+<p>This calculation uses the published matches. No new tournament was run. <a href="https://github.com/mariia-osipova/hive/tree/research/az-hive-exact-reproduction/research/az-hive-exact/results/published-bayeselo.json" target="_blank" rel="noopener noreferrer">Results and commands</a>.</p>
+<p>Data: <a href="/my-page/media/posts/hive/epochs.csv">epoch losses</a>, <a href="/my-page/media/posts/hive/metrics.csv">iteration metrics</a>, <a href="/my-page/media/posts/hive/pilot-summary.json">evaluation summary</a>. <a href="/my-page/media/posts/hive/plot_results.py">Python script for the plots</a>.</p>
+</section>
+</div>
+<footer class="content__footer"><div class="entry-wrapper"><p class="content__updated">This article was updated on October 26, 2026</p><p><a href="/my-page/">← All projects</a></p><div class="content__bio bio"><div><h3 class="h4 bio__name"><a href="https://mariia-osipova.github.io/my-page/authors/mariia-osipova/" rel="author">Mariia Osipova</a></h3></div></div></div></footer>
+</article></main>
+<footer class="footer footer--glued"><div class="wrapper"><div class="footer__copyright"><p>jeje</p></div><button id="backToTop" class="footer__bttop" aria-label="Back to top" title="Back to top"><svg width="20" height="20"><use xlink:href="https://mariia-osipova.github.io/my-page/assets/svg/svg-map.svg#toparrow"/></svg></button></div></footer>
+<script defer="defer" src="/my-page/assets/js/shared-topbar.js?v=4"></script><script defer="defer" src="/my-page/assets/js/scripts.min.js?v=d0fc1030089a37f93a2d51bf6d07565c"></script><script>window.publiiThemeMenuConfig={mobileMenuMode:'overlay',ariaButtonAttribute:'aria-expanded',animationSpeed:300,submenuWidth: 200,doubleClickTime:500,mobileMenuExpandableSubmenus:true,relatedContainerForOverlayMenuSelector:'.top'};</script><script>var images = document.querySelectorAll('img[loading]');
+        for (var i = 0; i < images.length; i++) {
+            if (images[i].complete) {
+                images[i].classList.add('is-loaded');
+            } else {
+                images[i].addEventListener('load', function () {
+                    this.classList.add('is-loaded');
+                }, false);
+            }
+        }</script>
+</body></html>
